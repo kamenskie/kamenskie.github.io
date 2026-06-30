@@ -120,4 +120,21 @@
   }
 })();
 </script>
+<script>
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(max-width: 760px)').matches) return;
+  if(document.body.classList.contains('tree-body')) return;
+  if(document.querySelector('.mobile-forward-nav')) return;
+  const path = location.pathname.toLowerCase();
+  const isBook = path.includes('/book/');
+  const root = isBook ? '../' : '';
+  const nav = document.createElement('div');
+  nav.className = 'mobile-forward-nav';
+  nav.innerHTML =
+    '<a href="'+root+'index.html">Главная</a>' +
+    '<a href="'+root+'tree.html">Древо</a>' +
+    '<a href="'+root+'book/index.html">Книга →</a>';
+  document.body.appendChild(nav);
+})();
+</script>
 </body></html>

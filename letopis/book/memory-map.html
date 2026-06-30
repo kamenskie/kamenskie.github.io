@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Карта памяти рода — Родовой Щит Каменских</title><link href="../assets/style.css" rel="stylesheet"/><style>.book-return-tree{position:fixed;right:18px;bottom:18px;z-index:50;background:#fff6e8;border:1px solid rgba(161,118,53,.28);border-radius:999px;padding:11px 15px;text-decoration:none;color:#3b2b1d;box-shadow:0 14px 35px rgba(80,57,30,.12);font:14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}@media(max-width:700px){.book-return-tree{right:12px;bottom:12px;font-size:13px}}</style></head><body><header class="topbar"><div class="topbar-inner"><a class="brand" href="../index.html">Книга Жизни <small>Родовой Щит Каменских</small></a><nav class="nav"><a href="../index.html">Главная</a><a href="../tree.html">Древо</a><a href="../people.html">Люди</a><a href="index.html">Книга</a><a href="../gallery.html">Фотолетопись рода</a><a href="../archive.html">Архив</a><a href="../map.html">Карта</a></nav></div></header><main class="layout"><article class="book-page memory-map-page"><h1 id="карта-памяти-рода">Карта памяти рода</h1>
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Карта памяти рода — Родовой Щит Каменских</title><link href="../assets/style.css" rel="stylesheet"/><style>.book-return-tree{position:fixed;right:18px;bottom:18px;z-index:50;background:#fff6e8;border:1px solid rgba(161,118,53,.28);border-radius:999px;padding:11px 15px;text-decoration:none;color:#3b2b1d;box-shadow:0 14px 35px rgba(80,57,30,.12);font:14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}@media(max-width:700px){.book-return-tree{right:12px;bottom:12px;font-size:13px}}</style></head><body><header class="topbar"><div class="topbar-inner"><a class="brand" href="../index.html">Книга Жизни <small>Родовой Щит Каменских</small></a><nav class="nav"><a href="../index.html">Главная</a><a href="../tree.html">Древо</a><a href="../people.html">Лица рода</a><a href="index.html">Книга</a><a href="../gallery.html">Фотолетопись рода</a><a href="../archive.html">Архив</a><a href="../map.html">Карта</a></nav></div></header><main class="layout"><article class="book-page memory-map-page"><h1 id="карта-памяти-рода">Карта памяти рода</h1>
 <p>Семейная история складывается не только из имён, но и из мест. Порзово, Шклово, Ивановское, Саратов, Сердобск, Энгельс, Электросталь, Алматы — за каждой точкой стоят люди, которые жили, служили, работали, растили детей и передавали жизнь дальше.</p>
 <a href="../assets/images/memory-map.png" target="_blank" rel="noopener" class="memory-map-full-link"><img class="memory-map-img memory-map-fullscreen" src="../assets/images/memory-map.png" alt="Карта памяти рода"/ class="memory-map-image zoomable">
 <p style="text-align:center">Порзово • Шклово • Ивановское • Саратов • Сердобск • Энгельс • Электросталь • Алматы</p>
@@ -124,6 +124,23 @@
   } else {
     addBackButton(); initLightbox();
   }
+})();
+</script>
+<script>
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(max-width: 760px)').matches) return;
+  if(document.body.classList.contains('tree-body')) return;
+  if(document.querySelector('.mobile-forward-nav')) return;
+  const path = location.pathname.toLowerCase();
+  const isBook = path.includes('/book/');
+  const root = isBook ? '../' : '';
+  const nav = document.createElement('div');
+  nav.className = 'mobile-forward-nav';
+  nav.innerHTML =
+    '<a href="'+root+'index.html">Главная</a>' +
+    '<a href="'+root+'tree.html">Древо</a>' +
+    '<a href="'+root+'book/index.html">Книга →</a>';
+  document.body.appendChild(nav);
 })();
 </script>
 </body></html>
