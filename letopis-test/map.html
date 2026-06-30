@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Карта памяти рода — Родовой Щит Каменских</title><link rel="stylesheet" href="assets/style.css"></head><body>
-<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">Книга Жизни <small>Родовой Щит Каменских</small></a><nav class="nav">
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Карта памяти рода — Родовой щит Каменских</title><link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">Родовой щит <small>Родовой щит Каменских</small></a><nav class="nav">
 <a href="index.html">Главная</a>
 <a href="tree.html">Древо</a>
+<a href="book/index.html">Родовой щит</a>
 <a href="people.html">Лица рода</a>
-<a href="book/index.html">Книга</a>
-<a href="gallery.html">Фотолетопись рода</a>
-<a href="archive.html">Архив</a>
+<a href="gallery.html">Фотолетопись</a>
+<a href="documents.html">Документы</a>
 <a href="map.html">Карта</a>
 </nav></div></header>
 <section class="section memory-map-section standalone-map" id="memory-map"><div class="section-title"><h1>Карта памяти рода</h1></div><p class="map-lead">География семьи Каменских охватывает несколько губерний, регионов и стран. Каждое место на этой карте связано с судьбами людей, чьи истории собраны в книге.</p><a class="memory-map-link" href="assets/images/memory-map.png" target="_blank" rel="noopener"><img class="memory-map-image" src="assets/images/memory-map.png" alt="Карта памяти рода Каменских"></a><p class="map-places">Порзово • Шклово • Ивановское • Саратов • Сердобск • Энгельс • Электросталь • Алматы</p></section>
-<footer class="footer">Книга Жизни. Родовой Щит Каменских.</footer><script>
+<footer class="footer">Родовой щит. Родовой щит Каменских.</footer><script>
 (function(){
   const fullPath = location.pathname.toLowerCase();
   const file = (fullPath.split('/').pop() || 'index.html');
@@ -145,7 +145,7 @@
   nav.innerHTML =
     '<a href="'+root+'index.html">Главная</a>' +
     '<a href="'+root+'tree.html">Древо</a>' +
-    '<a href="'+root+'book/index.html">Книга →</a>';
+    '<a href="'+root+'book/index.html">Родовой щит →</a>';
   document.body.appendChild(nav);
 })();
 </script>
@@ -177,11 +177,10 @@
     '</div>' +
     '<a href="'+root+'index.html">Главная</a>' +
     '<a href="'+root+'tree.html">Родословное древо</a>' +
+    '<a href="'+root+'book/index.html">Родовой щит</a>' +
     '<a href="'+root+'people.html">Лица рода</a>' +
-    '<a href="'+root+'book/index.html">Книга</a>' +
     '<a href="'+root+'gallery.html">Фотолетопись</a>' +
-    '<a href="'+root+'archive.html">Архив</a>' +
-    '<a href="'+root+'archive.html">Документы</a>' +
+    '<a href="'+root+'documents.html">Документы</a>' +
     '<a href="'+root+'map.html">Карта памяти</a>';
 
   function openMenu(){

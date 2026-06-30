@@ -62,7 +62,7 @@ body.tree-body:before{content:"";position:fixed;inset:0;pointer-events:none;opac
 }
 @media (min-width:901px){.tree-mobile-menu-btn,.tree-mobile-backdrop{display:none!important;}}
 
-</style></head><body class="tree-body"><button id="treeMobileMenuBtn" class="tree-mobile-menu-btn" aria-label="Открыть меню">☰</button><div id="treeMobileBackdrop" class="tree-mobile-backdrop"></div><button class="tree-menu-toggle" id="treeMenuToggle" aria-label="Открыть меню дерева">☰</button><div class="tree-menu-backdrop" id="treeMenuBackdrop"></div><div class="app"><aside class="side"><a class="logo" href="index.html"><span class="logo-mark">♣</span><span><strong>Каменские</strong><small>родовая летопись</small></span></a><nav class="menu"><a class="active" href="tree.html">♧ Древо</a><a href="people.html">▤ Лица рода</a><a href="book/index.html">□ Книга</a><a href="gallery.html">▧ Фото</a><a href="map.html">⌖ Карта</a></nav><div class="line-switch"><h3>Линии</h3><button class="view-btn active family-kamenskie" data-view="main"><strong>Каменские</strong><span>основной ствол рода</span></button><button class="view-btn family-fiseyskie" data-view="fiseyskie"><strong>Фисейские</strong><span>родственная линия Анны</span></button><button class="view-btn family-dobrolyubovy" data-view="dobrolyubovy"><strong>Добролюбовы</strong><span>ветвь Добролюбовых и Владыкиных</span></button><button class="view-btn family-related" data-view="branches"><strong>Связанные роды</strong><span>Благославовы, Богородицкие и другие</span></button></div><div class="side-note">Выберите человека, чтобы увидеть связи, документы и главы книги.</div></aside><main class="main"><div class="top"><h1 id="viewTitle">Основная линия Каменских</h1><div class="search">⌕ <input id="searchInput" placeholder="Найти человека" autocomplete="off"/></div><button class="btn" id="resetBtn">Показать всё</button><button class="btn mobile-panel-btn" id="panelBtn">О человеке</button></div><div class="viewport" id="viewport"><div class="canvas" id="canvas"><svg class="lines" id="lines" width="8800" height="5600"></svg><div id="nodes"></div></div><div class="legend"><span><i style="background:#8a5a2b"></i>Каменские</span><span><i style="background:#46745b"></i>Фисейские</span><span><i style="background:#8b3f4c"></i>Добролюбовы</span><span><i style="background:#315d77"></i>Благославовы</span><span><i style="background:#7f6532"></i>Богородицкие</span><span>♥ супруги</span></div><div class="zoom"><button id="zoomOut">−</button><button id="zoomIn">+</button></div></div></main><aside class="panel" id="panel"></aside></div><script src="data/people.js"></script><script>
+</style></head><body class="tree-body"><button id="treeLinesBtn" class="tree-lines-btn" type="button">Линии рода</button><button id="treeMobileMenuBtn" class="tree-mobile-menu-btn" aria-label="Открыть меню">☰</button><div id="treeMobileBackdrop" class="tree-mobile-backdrop"></div><button class="tree-menu-toggle" id="treeMenuToggle" aria-label="Открыть меню дерева">☰</button><div class="tree-menu-backdrop" id="treeMenuBackdrop"></div><div class="app"><aside class="side"><a class="logo" href="index.html"><span class="logo-mark">♣</span><span><strong>Каменские</strong><small>родовая летопись</small></span></a><nav class="menu"><a class="active" href="tree.html">♧ Древо</a><a href="book/index.html">□ Родовой щит</a><a href="people.html">▤ Лица рода</a><a href="gallery.html">▧ Фото</a><a href="map.html">⌖ Карта</a></nav><div class="line-switch"><h3>Линии рода</h3><button class="view-btn active family-kamenskie" data-view="main"><strong>Каменские</strong><span>основной ствол рода</span></button><button class="view-btn family-fiseyskie" data-view="fiseyskie"><strong>Фисейские</strong><span>родственная линия Анны</span></button><button class="view-btn family-dobrolyubovy" data-view="dobrolyubovy"><strong>Добролюбовы</strong><span>ветвь Добролюбовых и Владыкиных</span></button><button class="view-btn family-related" data-view="branches"><strong>Связанные роды</strong><span>Благославовы, Богородицкие и другие</span></button></div><div class="side-note">Выберите человека, чтобы увидеть связи, документы и главы книги.</div></aside><main class="main"><div class="top"><h1 id="viewTitle">Основная линия Каменских</h1><div class="search">⌕ <input id="searchInput" placeholder="Найти человека" autocomplete="off"/></div><button class="btn" id="resetBtn">Показать всё</button><button class="btn mobile-panel-btn" id="panelBtn">О человеке</button></div><div class="viewport" id="viewport"><div class="canvas" id="canvas"><svg class="lines" id="lines" width="8800" height="5600"></svg><div id="nodes"></div></div><div class="legend"><span><i style="background:#8a5a2b"></i>Каменские</span><span><i style="background:#46745b"></i>Фисейские</span><span><i style="background:#8b3f4c"></i>Добролюбовы</span><span><i style="background:#315d77"></i>Благославовы</span><span><i style="background:#7f6532"></i>Богородицкие</span><span>♥ супруги</span></div><div class="zoom"><button id="zoomIn">+</button><button id="zoomOut">−</button><button id="treeFitMobile" class="tree-fit-mobile" type="button">Уместить</button></div></div></main><aside class="panel" id="panel"></aside></div><script src="data/people.js"></script><script>
 
 /* v3.7.1 — Anastasia cleanup */
 (function(){
@@ -285,7 +285,7 @@ const initialView=Object.entries(treeViews).find(([k,v])=>v.ids.includes(selecte
   nav.innerHTML =
     '<a href="'+root+'index.html">Главная</a>' +
     '<a href="'+root+'tree.html">Древо</a>' +
-    '<a href="'+root+'book/index.html">Книга →</a>';
+    '<a href="'+root+'book/index.html">Родовой щит →</a>';
   document.body.appendChild(nav);
 })();
 </script>
@@ -369,6 +369,88 @@ const initialView=Object.entries(treeViews).find(([k,v])=>v.ids.includes(selecte
   window.addEventListener('load', ()=>setTimeout(wireTreePanelMobile,150));
   window.addEventListener('resize', closePanelOnMobile);
   setTimeout(wireTreePanelMobile,350);
+})();
+</script>
+<script>
+/* v3.32 — final mobile tree panel guard */
+(function(){
+  function mobile(){return window.matchMedia && window.matchMedia('(max-width:900px)').matches;}
+  function closePanel(){const p=document.getElementById('panel'); if(mobile()&&p) p.classList.remove('open');}
+  function setup(){
+    if(!mobile()) return;
+    const panel=document.getElementById('panel');
+    const nodes=document.getElementById('nodes');
+    const viewport=document.getElementById('viewport');
+    if(!panel) return;
+    panel.classList.remove('open');
+    if(nodes && !nodes.dataset.v32Panel){
+      nodes.dataset.v32Panel='1';
+      nodes.addEventListener('click', function(e){
+        if(e.target.closest('.person-node')) setTimeout(()=>panel.classList.add('open'),80);
+      }, true);
+    }
+    if(viewport && !viewport.dataset.v32PanelClose){
+      viewport.dataset.v32PanelClose='1';
+      viewport.addEventListener('click', function(e){
+        if(!e.target.closest('.person-node') && !e.target.closest('#panel')) panel.classList.remove('open');
+      });
+    }
+  }
+  window.addEventListener('load',()=>setTimeout(setup,250));
+  window.addEventListener('resize',closePanel);
+  setTimeout(setup,600);
+})();
+</script>
+<script>
+(function(){
+  function isMobile(){return window.matchMedia && window.matchMedia('(max-width:900px)').matches}
+  const btn=document.getElementById('treeLinesBtn');
+  const side=document.querySelector('.side');
+  const backdrop=document.getElementById('treeMobileBackdrop') || document.querySelector('.tree-mobile-backdrop');
+  function openLines(){
+    if(!isMobile() || !side) return;
+    side.classList.add('mobile-open');
+    backdrop && backdrop.classList.add('open');
+  }
+  btn && btn.addEventListener('click', openLines);
+})();
+</script>
+<script>
+(function(){
+  function isMobile(){return window.matchMedia && window.matchMedia('(max-width:900px)').matches}
+
+  function setTreeMobileReadable(){
+    if(!isMobile() || typeof applyTransform !== 'function') return;
+    try{
+      // Readable default: not the whole tree, but large enough to read cards.
+      scale = 0.18;
+      tx = Math.round(window.innerWidth * 0.08);
+      ty = 24;
+      applyTransform();
+    }catch(e){}
+  }
+
+  function setTreeMobileFit(){
+    if(!isMobile() || typeof applyTransform !== 'function') return;
+    try{
+      // Overview mode: use this only when user wants to see the whole branch.
+      scale = 0.115;
+      tx = Math.round(window.innerWidth * 0.06);
+      ty = 18;
+      applyTransform();
+    }catch(e){}
+  }
+
+  window.addEventListener('load', function(){
+    setTimeout(setTreeMobileReadable, 350);
+  });
+
+  const fit = document.getElementById('treeFitMobile');
+  fit && fit.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    setTreeMobileFit();
+  });
 })();
 </script>
 </body></html>

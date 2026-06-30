@@ -2838,3 +2838,220 @@ body.book-toc-page .toc-grid{
     font:800 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
   }
 }
+
+
+/* v3.32 — clean mobile state for Лица рода */
+.people-v32-family-toggle,
+.people-v32-family-menu,
+.people-v32-family-backdrop{display:none;}
+@media(max-width:760px){
+  body.people-v32-mobile .tools{display:block!important;overflow:visible!important;}
+  body.people-v32-mobile .tools .family-filter{display:none!important;}
+  body.people-v32-mobile .search-archive{width:100%!important;box-sizing:border-box!important;margin-bottom:10px!important;}
+
+  .people-v32-family-toggle{display:flex!important;position:sticky!important;top:66px!important;z-index:165!important;width:calc(100vw - 24px)!important;margin:10px auto 12px!important;min-height:46px!important;align-items:center!important;justify-content:space-between!important;padding:0 16px!important;border-radius:999px!important;border:1px solid rgba(138,86,39,.22)!important;background:rgba(255,248,238,.98)!important;color:#4a3829!important;box-shadow:0 12px 32px rgba(68,44,18,.12)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;font:800 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;}
+  .people-v32-family-toggle b{font-size:19px!important;opacity:.72!important;}
+  .people-v32-family-backdrop{display:none!important;position:fixed!important;inset:0!important;z-index:170!important;background:rgba(38,25,14,.20)!important;backdrop-filter:blur(1px)!important;-webkit-backdrop-filter:blur(1px)!important;}
+  .people-v32-family-backdrop.open{display:block!important;}
+  .people-v32-family-menu{display:flex!important;position:fixed!important;left:12px!important;right:12px!important;top:120px!important;z-index:175!important;flex-wrap:wrap!important;gap:8px!important;max-height:min(54vh,430px)!important;overflow:auto!important;padding:14px!important;box-sizing:border-box!important;border-radius:24px!important;border:1px solid rgba(138,86,39,.20)!important;background:rgba(255,250,241,.985)!important;box-shadow:0 22px 64px rgba(69,46,24,.22)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;opacity:0!important;pointer-events:none!important;transform:translateY(-8px) scale(.98)!important;transition:opacity .16s ease,transform .16s ease!important;}
+  .people-v32-family-menu.open{opacity:1!important;pointer-events:auto!important;transform:translateY(0) scale(1)!important;}
+  .people-v32-family-menu button{flex:0 0 auto!important;min-height:40px!important;padding:10px 14px!important;border-radius:999px!important;border:1px solid rgba(138,86,39,.22)!important;background:rgba(255,248,238,.9)!important;color:#523b29!important;white-space:nowrap!important;font:700 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;}
+  .people-v32-family-menu button.active{background:#2d1e15!important;color:#fff7ec!important;border-color:#2d1e15!important;}
+
+  body.people-v32-mobile .layout{display:block!important;}
+  body.people-v32-mobile #personList{display:block!important;}
+  body.people-v32-mobile #personCard{display:none!important;}
+  body.people-v32-mobile.people-detail-open #personList{display:none!important;}
+  body.people-v32-mobile.people-detail-open #personCard{display:block!important;margin-top:14px!important;}
+  body.people-v32-mobile #personList .item{position:relative!important;width:100%!important;cursor:pointer!important;padding-right:104px!important;}
+  body.people-v32-mobile #personList .item:after{content:"Подробнее"!important;position:absolute!important;right:14px!important;top:50%!important;transform:translateY(-50%)!important;padding:8px 10px!important;border-radius:999px!important;border:1px solid rgba(138,86,39,.22)!important;background:rgba(255,248,238,.95)!important;color:#6a4a2d!important;font:800 11px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;}
+  .people-v32-back{display:block!important;width:100%!important;min-height:44px!important;margin:0 0 14px!important;border-radius:999px!important;border:1px solid rgba(138,86,39,.22)!important;background:rgba(255,248,238,.96)!important;color:#513b29!important;font:800 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;}
+}
+
+
+/* v3.33 — structure/nav/archive/documents/tree readability */
+.documents-page{
+  max-width:1180px;
+  margin:0 auto;
+  padding:110px 22px 64px;
+}
+.documents-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+}
+.document-card{
+  display:block;
+  padding:22px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  color:var(--ink);
+  text-decoration:none;
+  box-shadow:0 14px 42px rgba(75,54,34,.07);
+}
+.document-card strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:21px;
+  line-height:1.18;
+  margin-bottom:8px;
+}
+.document-card span{
+  display:block;
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:12px;
+}
+.document-card em{
+  font-style:normal;
+  color:var(--brown);
+  font-weight:800;
+}
+
+.gallery-all{
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+}
+.gallery-all img{
+  height:210px;
+  object-fit:contain;
+}
+
+/* Tree readability controls */
+body.tree-body .zoom button{
+  min-width:58px !important;
+  height:58px !important;
+  font-size:32px !important;
+  font-weight:800 !important;
+  border-radius:18px !important;
+}
+body.tree-body .zoom{
+  gap:10px !important;
+}
+.tree-lines-btn{
+  display:none;
+}
+
+@media(max-width:900px){
+  body.tree-body .zoom{
+    right:14px !important;
+    bottom:18px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    z-index:70 !important;
+  }
+  body.tree-body .zoom button{
+    min-width:64px !important;
+    height:64px !important;
+    font-size:36px !important;
+    border-radius:20px !important;
+    background:rgba(255,248,238,.98) !important;
+    box-shadow:0 14px 36px rgba(69,46,24,.18) !important;
+  }
+  .tree-lines-btn{
+    display:flex !important;
+    position:fixed !important;
+    left:58px !important;
+    top:12px !important;
+    z-index:151 !important;
+    height:40px !important;
+    padding:0 14px !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:999px !important;
+    border:1px solid rgba(138,86,39,.25) !important;
+    background:rgba(255,248,238,.97) !important;
+    color:#5d4228 !important;
+    box-shadow:0 12px 30px rgba(69,46,24,.16) !important;
+    font:800 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+  }
+  body.tree-body .line-switch h3{
+    font-size:13px !important;
+    letter-spacing:.12em !important;
+  }
+  body.tree-body .view-btn{
+    padding:14px 13px !important;
+    margin-bottom:7px !important;
+  }
+  body.tree-body .view-btn strong{
+    font-size:17px !important;
+  }
+  body.tree-body .view-btn span{
+    font-size:12px !important;
+  }
+}
+
+@media(max-width:760px){
+  .documents-page{
+    padding:82px 14px 70px;
+  }
+  .documents-grid{
+    grid-template-columns:1fr;
+  }
+  .gallery-all{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+  .gallery-all img{
+    height:158px !important;
+  }
+  .gallery-all span{
+    font-size:12px !important;
+  }
+}
+
+
+/* v3.35 — smartphone tree is larger/readable by default */
+@media(max-width:900px){
+  body.tree-body .viewport{
+    top:96px !important;
+    height:calc(100vh - 96px) !important;
+  }
+
+  body.tree-body .zoom{
+    right:12px !important;
+    bottom:16px !important;
+    gap:8px !important;
+    z-index:90 !important;
+  }
+
+  body.tree-body .zoom button{
+    min-width:62px !important;
+    height:62px !important;
+    font-size:35px !important;
+    border-radius:20px !important;
+    font-weight:900 !important;
+  }
+
+  body.tree-body .zoom .tree-fit-mobile{
+    min-width:86px !important;
+    height:44px !important;
+    font-size:13px !important;
+    border-radius:999px !important;
+    padding:0 12px !important;
+  }
+
+  body.tree-body .person-node{
+    width:244px !important;
+    min-height:192px !important;
+  }
+
+  body.tree-body .person-node h3{
+    font-size:17px !important;
+    line-height:1.12 !important;
+  }
+
+  body.tree-body .person-node p{
+    font-size:12px !important;
+  }
+
+  .tree-lines-btn{
+    left:58px !important;
+    top:12px !important;
+    height:42px !important;
+    padding:0 15px !important;
+    font-size:14px !important;
+  }
+}
