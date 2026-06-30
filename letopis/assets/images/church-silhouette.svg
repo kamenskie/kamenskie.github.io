@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" fill="none">
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+    <stop stop-color="#8c6a45" stop-opacity="0.95"/>
+    <stop offset="1" stop-color="#6e5033" stop-opacity="0.95"/>
+  </linearGradient>
+</defs>
+<path d="M0 470H1200" stroke="url(#g)" stroke-width="8" stroke-linecap="round"/>
+<path d="M70 470V350H140V300H190V245H255V210H300V245H360V315H420V470" fill="url(#g)" fill-opacity="0.35"/>
+<path d="M70 470V350H140V300H190V245H255V210H300V245H360V315H420V470" stroke="#7c5936" stroke-opacity="0.92" stroke-width="8" stroke-linejoin="round"/>
+<path d="M190 245V180H255V145H300V180H360V245" stroke="#7c5936" stroke-width="8" stroke-linejoin="round"/>
+<path d="M255 145V100H300V145" stroke="#7c5936" stroke-width="8" stroke-linejoin="round"/>
+<path d="M255 100L277 60H300L322 100" fill="url(#g)" fill-opacity="0.25" stroke="#7c5936" stroke-width="8" stroke-linejoin="round"/>
+<path d="M800 470V330H855V270H915V210H965V270H1025V330H1090V470" fill="url(#g)" fill-opacity="0.25"/>
+<path d="M800 470V330H855V270H915V210H965V270H1025V330H1090V470" stroke="#7c5936" stroke-opacity="0.92" stroke-width="8" stroke-linejoin="round"/>
+<path d="M915 210V165H965V210" stroke="#7c5936" stroke-width="8" stroke-linejoin="round"/>
+<path d="M932 165V118H948V165M905 145H975M918 128H962M928 108H952" stroke="#a22e2e" stroke-width="8" stroke-linecap="round"/>
+<path d="M276 60V18M244 40H310M252 27H302M264 8H290" stroke="#a22e2e" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Родословное древо — Архив Каменских</title><link href="assets/style.css" rel="stylesheet"/><style>
+:root{--bg:#f7efe2;--paper:#fffaf1;--paper2:#fbf3e7;--ink:#2a2119;--muted:#75685a;--gold:#a17635;--line:#b8945a;--soft:#eadbc5;--shadow:0 22px 70px rgba(81,57,29,.12)}
+body.tree-body{margin:0;background:radial-gradient(circle at 50% -10%,#fff 0,#fff8ed 35%,#f3e7d4 100%);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}
+body.tree-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.19;background-image:url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E")}
+.app{height:100vh;display:grid;grid-template-columns:235px 1fr 410px;position:relative;z-index:1}.side{padding:26px 18px;border-right:1px solid rgba(130,95,45,.16);background:rgba(255,250,241,.72);backdrop-filter:blur(12px)}.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);margin-bottom:28px}.logo-mark{width:44px;height:44px;border-radius:50%;background:#eee0c8;display:grid;place-items:center;color:var(--gold);font-size:23px}.logo strong{display:block;font-family:Georgia,serif;font-size:24px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}.logo small{display:block;color:var(--muted);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}.menu{display:grid;gap:6px;margin-bottom:25px}.menu a{padding:12px 13px;border-radius:13px;text-decoration:none;color:#3f352b;display:flex;gap:10px;align-items:center}.menu a:hover,.menu a.active{background:rgba(209,176,122,.28)}.line-switch{border-top:1px solid rgba(130,95,45,.16);padding-top:18px}.line-switch h3{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#8e6c3e;margin:0 0 10px}.view-btn{width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:12px;cursor:pointer;color:#42362b}.view-btn:hover,.view-btn.active{background:#efe2cf}.view-btn strong{display:block;font-size:14px}.view-btn span{display:block;color:#796c5d;font-size:12px;margin-top:3px}.side-note{position:absolute;left:24px;bottom:24px;width:170px;color:#6c5d4d;font-family:Georgia,serif;line-height:1.5;font-size:14px}.main{position:relative;overflow:hidden}.top{height:76px;display:flex;align-items:center;gap:14px;padding:0 28px;border-bottom:1px solid rgba(130,95,45,.12);background:rgba(255,250,241,.55);backdrop-filter:blur(10px);z-index:5;position:relative}.top h1{font-family:Georgia,serif;font-weight:500;margin:0 auto 0 0;font-size:23px}.search{display:flex;gap:9px;align-items:center;background:#fffaf1;border:1px solid rgba(151,109,55,.24);border-radius:999px;padding:10px 14px;width:250px}.search input{border:0;background:transparent;outline:0;width:100%;font-size:14px}.btn{border:1px solid rgba(151,109,55,.24);background:#fffaf1;border-radius:12px;padding:10px 13px;cursor:pointer;color:#5a4b3d}.viewport{position:absolute;inset:76px 0 0 0;overflow:hidden;cursor:grab}.viewport:active{cursor:grabbing}.canvas{position:absolute;left:50%;top:34px;width:8800px;height:5600px;transform-origin:0 0;transition:transform .12s ease-out}.lines{position:absolute;inset:0;overflow:visible}.lines path{fill:none;stroke:rgba(139,96,36,.70);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}.lines path.spouse-line{stroke-dasharray:0;stroke:rgba(185,31,45,.78);stroke-width:3.2}.person-node{position:absolute;transform:translate(-50%,-50%);width:222px;min-height:176px;box-sizing:border-box;border:1px solid color-mix(in srgb, var(--accent, #a17635) 52%, rgba(134,98,44,.18));border-top:6px solid var(--accent, #a17635);background:rgba(255,250,241,.88);border-radius:20px;box-shadow:0 18px 46px rgba(80,57,30,.085);padding:14px 14px 13px;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:flex-start;cursor:pointer;transition:.22s ease;backdrop-filter:blur(4px)}.person-node:hover{transform:translate(-50%,-53%);box-shadow:0 26px 64px rgba(80,57,30,.15)}.person-node:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:5px;border-radius:0 8px 8px 0;background:var(--accent,#a17635);opacity:.8}.person-node.selected{border-color:var(--accent, #a17635);box-shadow:0 0 0 3px rgba(161,118,53,.12),0 26px 64px rgba(80,57,30,.16)}.person-node.important{background:#fffaf2}.person-node.spine{box-shadow:0 20px 56px rgba(80,57,30,.16);border-color:#7d5529;border-top-color:#7d5529;background:linear-gradient(180deg,rgba(255,250,241,.96),rgba(255,246,230,.92))}.person-node.spine:after{content:"";position:absolute;inset:-8px;border-radius:28px;border:1px solid rgba(125,85,41,.14);pointer-events:none}.portrait{width:78px;height:92px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#f0e1cd,#fff8ec);display:grid;place-items:center;border:1px solid rgba(134,98,44,.25);box-shadow:0 8px 20px rgba(80,57,30,.10)}.portrait img{width:100%;height:100%;object-fit:cover}.portrait.empty:after{content:"";width:22px;height:22px;border:1px solid rgba(134,98,44,.45);border-radius:50%}.person-node h3{font-family:Georgia,serif;font-size:16px;line-height:1.12;margin:0 0 3px;font-weight:500;overflow-wrap:break-word;word-break:normal;hyphens:auto;text-align:center;max-width:204px}.person-node p{margin:0;color:#786b5d;font-size:11px;line-height:1.28;overflow-wrap:break-word;text-align:center;max-width:204px}.badges{display:flex;gap:6px;margin-top:3px;justify-content:center}.badge{font-size:12px;color:var(--gold);opacity:.95}.marriage{position:absolute;transform:translate(-50%,-50%);width:104px;height:104px;z-index:3;border-radius:50%;background:#fff7e8;border:1px solid rgba(161,118,53,.36);display:grid;place-items:center;color:var(--gold);box-shadow:0 8px 24px rgba(80,57,30,.12);font-size:58px;color:#b91f2d;background:#fff5f3;border:2px solid rgba(185,31,45,.40)}.badge.clergy-badge{font-size:34px;color:#b91f2d;line-height:1;font-weight:800}.clergy-cross{position:absolute;right:8px;top:8px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#fff2f1;border:3px solid rgba(185,31,45,.44);color:#b91f2d;font-size:46px;line-height:1;font-weight:900;box-shadow:0 12px 30px rgba(185,31,45,.20);z-index:4}.legend i{display:inline-block;width:14px;height:4px;border-radius:999px;margin-right:6px;vertical-align:middle}.legend{position:absolute;left:20px;bottom:18px;background:rgba(255,250,241,.9);border:1px solid rgba(151,109,55,.2);border-radius:14px;padding:11px 13px;display:flex;gap:12px;flex-wrap:wrap;box-shadow:var(--shadow);font-size:12px;color:#5e5145}.zoom{position:absolute;right:18px;bottom:18px;background:rgba(255,250,241,.9);border:1px solid rgba(151,109,55,.2);border-radius:14px;padding:7px;display:flex;gap:6px;box-shadow:var(--shadow)}.zoom button{width:34px;height:32px;border:0;background:transparent;border-radius:9px;font-size:18px;cursor:pointer}.zoom button:hover{background:#efe2cf}.panel{border-left:1px solid rgba(130,95,45,.16);background:rgba(255,250,241,.78);backdrop-filter:blur(12px);padding:28px 25px;overflow:auto}.panel-photo{width:172px;height:216px;border-radius:18px;overflow:hidden;background:#eee0ca;box-shadow:0 18px 50px rgba(80,57,30,.15);margin-bottom:22px}.panel-photo img{width:100%;height:100%;object-fit:cover}.panel-photo.empty{display:grid;place-items:center;padding:18px;box-sizing:border-box;color:#847363;text-align:center}.panel-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#9c6f37;margin-bottom:8px}.panel h2{font-family:Georgia,serif;font-weight:500;font-size:33px;line-height:1.06;margin:0 0 14px;overflow-wrap:break-word}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.chip{border:1px solid rgba(151,109,55,.22);border-radius:999px;padding:7px 10px;font-size:13px;color:#635344;background:#fffdf8}.summary{font-size:15.5px;line-height:1.58;color:#4f4134;margin:0 0 20px}.section{border-top:1px solid rgba(151,109,55,.18);padding-top:18px;margin-top:18px}.section h4{font-size:11px;text-transform:uppercase;letter-spacing:.17em;color:#9c6f37;margin:0 0 12px}.section ul{margin:0;padding-left:18px;color:#504236;line-height:1.55}.row{display:grid;grid-template-columns:82px 1fr;gap:10px;margin:0 0 10px;line-height:1.45;font-size:14px}.row b{font-weight:600}.row span{color:#62574b}.panel-actions{display:grid;gap:10px;margin-top:20px}.panel-actions a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:#3b2b1d;background:#fff6e5;border:1px solid rgba(161,118,53,.22);border-radius:13px;padding:13px 15px}.family-map{font-size:12px;color:#716354;margin-top:8px}.mobile-panel-btn{display:none}
+
+/* Family branch chips / Museum navigation */
+.view-btn{position:relative;border:1px solid transparent}
+.view-btn::before{content:"";display:inline-block;width:13px;height:13px;border-radius:4px;margin-right:9px;vertical-align:-2px;background:#8a5a2b;box-shadow:0 0 0 3px rgba(138,90,43,.10)}
+.view-btn strong{display:inline-block}
+.view-btn.family-kamenskie::before{background:#8a5a2b}
+.view-btn.family-fiseyskie::before{background:#46745b}
+.view-btn.family-dobrolyubovy::before{background:#8b3f4c}
+.view-btn.family-related::before{background:#315d77}
+.view-btn.active{border-color:rgba(138,90,43,.22);box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.family-tag{display:inline-flex;align-items:center;gap:6px;margin-top:3px;padding:4px 7px;border-radius:7px;background:color-mix(in srgb,var(--accent,#a17635) 14%,#fffaf1);border:1px solid color-mix(in srgb,var(--accent,#a17635) 42%,transparent);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#4b3c2f}
+.family-tag::before{content:"";width:9px;height:9px;border-radius:3px;background:var(--accent,#a17635)}
+.branch-label{position:absolute;transform:translate(-50%,-50%);z-index:2;min-width:190px;padding:13px 18px;border-radius:16px;background:var(--accent);color:white;text-align:center;font-family:Georgia,serif;font-size:17px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 18px 44px rgba(80,57,30,.16)}
+.branch-label small{display:block;margin-top:4px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:none;opacity:.88}
+.branch-label.soft{color:#2a2119;background:color-mix(in srgb,var(--accent) 18%,#fffaf1);border:1px solid color-mix(in srgb,var(--accent) 44%,rgba(134,98,44,.12));box-shadow:0 14px 36px rgba(80,57,30,.10)}
+
+@media(max-width:1100px){body.tree-body{overflow:auto}.app{display:block;height:auto;min-height:100vh}.side{display:flex;gap:12px;align-items:center;overflow:auto;padding:12px 14px;position:sticky;top:0;z-index:20}.logo{margin:0;min-width:190px}.logo strong{font-size:18px}.logo small{font-size:9px}.menu,.line-switch{display:flex;gap:6px;margin:0;padding:0;border:0}.line-switch h3,.side-note{display:none}.view-btn{white-space:nowrap;width:auto}.main{height:780px}.top{height:62px;padding:0 13px}.top h1{display:none}.search{flex:1;width:auto}.viewport{inset:62px 0 0 0}.canvas{left:20px;top:20px;transform:scale(.36);transform-origin:0 0}.panel{position:fixed;left:0;right:0;bottom:0;max-height:78vh;border-left:0;border-top:1px solid rgba(151,109,55,.22);border-radius:22px 22px 0 0;box-shadow:0 -22px 60px rgba(80,57,30,.16);z-index:40;display:none}.panel.open{display:block}.mobile-panel-btn{display:inline-block}.panel h2{font-size:28px}.panel-photo{width:104px;height:132px;float:left;margin-right:16px}.legend{left:10px;right:10px;bottom:10px}.zoom{display:none}}
+
+/* Museum Edition v3: линияовая композиция */
+.branch-label{position:absolute;transform:translate(-50%,-50%);min-width:220px;padding:14px 18px;border-radius:16px;background:color-mix(in srgb,var(--accent,#a17635) 18%,#fffaf1);border:1px solid color-mix(in srgb,var(--accent,#a17635) 50%,transparent);border-left:10px solid var(--accent,#a17635);box-shadow:0 18px 42px rgba(80,57,30,.10);font-family:Georgia,serif;font-size:20px;letter-spacing:.05em;text-transform:uppercase;text-align:left;color:#2c2118;z-index:2}.branch-label small{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6e6256}.branch-label.soft{opacity:.92;transform:translate(-50%,-50%) scale(.92)}
+.person-node{width:236px;min-height:188px}.person-node h3{font-size:16.5px}.person-node.spine{border-width:1px;border-top-width:8px}.marriage{box-shadow:0 14px 35px rgba(185,31,45,.14),0 0 0 12px rgba(185,31,45,.045)}.clergy-cross{box-shadow:0 12px 26px rgba(185,31,45,.15),0 0 0 7px rgba(185,31,45,.045)}
+.clergy-cross{right:8px!important;top:8px!important;width:64px!important;height:64px!important;font-size:46px!important;border-width:3px!important;color:#b91f2d!important;background:#fff2f1!important;box-shadow:0 12px 30px rgba(185,31,45,.20),0 0 0 8px rgba(185,31,45,.055)!important}.person-node{margin:0!important}
+/* Museum Edition v3.3 — art direction check */
+.person-node{width:236px;min-height:188px;padding:16px 15px 14px;border-radius:22px;}
+.person-node:hover{transform:translate(-50%,-50%);}
+.person-node h3{font-size:16.5px;max-width:210px;}
+.person-node p{font-size:11.5px;max-width:210px;}
+.clergy-cross{right:-16px;top:-18px;width:78px;height:78px;font-size:55px;border-width:4px;background:#fff0ef;box-shadow:0 14px 36px rgba(185,31,45,.22);}
+.marriage{width:118px;height:118px;font-size:66px;border:3px solid rgba(185,31,45,.44);background:#fff2f1;box-shadow:0 18px 42px rgba(185,31,45,.16);}
+.lines path{stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.92;}
+.lines path.spouse-line{stroke-width:4.5;opacity:.95;}
+.branch-label{font-size:19px;padding:16px 20px;border-radius:18px;}
+</style></head><body class="tree-body"><div class="app"><aside class="side"><a class="logo" href="index.html"><span class="logo-mark">♣</span><span><strong>Каменские</strong><small>цифровой музей</small></span></a><nav class="menu"><a class="active" href="tree.html">♧ Древо</a><a href="people.html">▤ Люди</a><a href="book/index.html">□ Книга</a><a href="gallery.html">▧ Фото</a><a href="map.html">⌖ Карта</a></nav><div class="line-switch"><h3>Линии</h3><button class="view-btn active family-kamenskie" data-view="main"><strong>Каменские</strong><span>основной ствол рода</span></button><button class="view-btn family-fiseyskie" data-view="fiseyskie"><strong>Фисейские</strong><span>родственная линия Анны</span></button><button class="view-btn family-dobrolyubovy" data-view="dobrolyubovy"><strong>Добролюбовы</strong><span>ветвь Добролюбовых и Владыкиных</span></button><button class="view-btn family-related" data-view="branches"><strong>Связанные роды</strong><span>Благославовы, Богородицкие и другие</span></button></div><div class="side-note">Выберите человека, чтобы увидеть связи, документы и главы книги.</div></aside><main class="main"><div class="top"><h1 id="viewTitle">Основная линия Каменских</h1><div class="search">⌕ <input id="searchInput" placeholder="Найти человека" autocomplete="off"/></div><button class="btn" id="resetBtn">Показать всё</button><button class="btn mobile-panel-btn" id="panelBtn">О человеке</button></div><div class="viewport" id="viewport"><div class="canvas" id="canvas"><svg class="lines" id="lines" width="8800" height="5600"></svg><div id="nodes"></div></div><div class="legend"><span><i style="background:#8a5a2b"></i>Каменские</span><span><i style="background:#46745b"></i>Фисейские</span><span><i style="background:#8b3f4c"></i>Добролюбовы</span><span><i style="background:#315d77"></i>Благославовы</span><span><i style="background:#7f6532"></i>Богородицкие</span><span>♥ супруги</span></div><div class="zoom"><button id="zoomOut">−</button><button id="zoomIn">+</button></div></div></main><aside class="panel" id="panel"></aside></div><script src="data/people.js"></script><script>
+
+/* v3.7.1 — Anastasia cleanup */
+(function(){
+  const a = (typeof people !== 'undefined') ? people.find(p=>p.id==='anastasia') : null;
+  if(a){
+    a.name = 'Анастасия Каменская';
+    a.short = 'Анастасия Каменская';
+    a.years = '';
+    a.family = '';
+  }
+})();
+
+const byId=new Proxy({}, { get:(target, key)=>people.find(p=>p.id===key) });const familyColors={'Каменские':'#8a5a2b','Фисейские':'#46745b','Добролюбовы':'#8b3f4c','Благославовы':'#315d77','Богородицкие':'#7f6532','Владыкины':'#5b527b','Ковалевы':'#6d6a58','Соколовы':'#8a6e25','Голубевы':'#506f8c','Рубины':'#7b4b4b'};const branchMarkers={
+  main:[{title:'Каменские',note:'основной ствол рода',x:1120,y:-90,color:familyColors['Каменские']}],
+  fiseyskie:[{title:'Фисейские',note:'самостоятельная семейная экспозиция',x:1640,y:-90,color:familyColors['Фисейские']},{title:'Каменские',note:'переход через брак Анны и Евгения',x:1760,y:1340,color:familyColors['Каменские'],soft:true}],
+  dobrolyubovy:[{title:'Добролюбовы',note:'семейная линия',x:2550,y:-90,color:familyColors['Добролюбовы']},{title:'Каменские',note:'брачная связь',x:730,y:910,color:familyColors['Каменские'],soft:true},{title:'Владыкины',note:'родственная ветвь',x:5050,y:910,color:familyColors['Владыкины'],soft:true}],
+  branches:[{title:'Связанные роды',note:'несколько самостоятельных фамильных блоков',x:3150,y:-90,color:familyColors['Благославовы']},{title:'Богородицкие',note:'левый блок',x:980,y:420,color:familyColors['Богородицкие'],soft:true},{title:'Благославовы',note:'правый блок',x:3860,y:420,color:familyColors['Благославовы'],soft:true},{title:'Голубевы и Рубины',note:'нижний ряд связей',x:2500,y:2040,color:familyColors['Голубевы'],soft:true}]
+};const mainSpine=new Set(['kamensky-pavel-grigorievich','kamensky-vasily-pavlovich','kamensky-ivan-vasilievich','kamensky-evgeniy-ivanovich','kamensky-sergey-evgenievich','kamensky-vladimir-sergeevich','kamensky-alexey-vladimirovich','kamensky-dmitry-alexeevich','kamensky-ilya-alexeevich']);const queryPerson=new URLSearchParams(location.search).get('person');let currentView='main',selected=queryPerson||treeViews.main.ids[0],scale=.18,tx=-420,ty=10;const viewport=document.getElementById('viewport'),canvas=document.getElementById('canvas'),nodes=document.getElementById('nodes'),lines=document.getElementById('lines'),panel=document.getElementById('panel'),title=document.getElementById('viewTitle');function esc(s){return (s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}function view(){return treeViews[currentView]}function applyTransform(){canvas.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`}function relationInView(r){const ids=new Set(view().ids);return ids.has(r.from)&&ids.has(r.to)}function pos(id){return view().positions[id]||[0,0]}function linePath(a,b,type){const [x1,y1]=pos(a),[x2,y2]=pos(b);if(type==='spouse')return `M ${x1} ${y1} C ${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}`;const mid=(y1+y2)/2;return `M ${x1} ${y1+150} C ${x1} ${mid} ${x2} ${mid} ${x2} ${y2-150}`}function render(){title.textContent=view().title;const ids=view().ids;const rels=relationships.filter(relationInView);lines.innerHTML=rels.map(r=>{const child=byId[r.to], from=byId[r.from]; const stroke=r.type==='spouse' ? '#b91f2d' : (familyColors[child?.family]||familyColors[from?.family]||'#a17635'); return `<path class="${r.type==='spouse'?'spouse-line':''}" style="stroke:${stroke}" d="${linePath(r.from,r.to,r.type)}"/>`}).join('');const marriageIcons=rels.filter(r=>r.type==='spouse').map(r=>{const [x1,y1]=pos(r.from),[x2,y2]=pos(r.to);return `<div class="marriage" style="left:${(x1+x2)/2}px;top:${(y1+y2)/2}px">♥</div>`}).join('');const branchLabels=(branchMarkers[currentView]||[]).map(m=>`<div class="branch-label ${m.soft?'soft':''}" style="left:${m.x}px;top:${m.y}px;--accent:${m.color}">${m.title}<small>${m.note||''}</small></div>`).join('');nodes.innerHTML=branchLabels+marriageIcons+ids.map(id=>{const p=byId[id];if(!p)return'';const [x,y]=pos(id);const photo=p.photo?`<img src="${p.photo}" alt="${esc(p.name)}">`:'';const badges=`${p.repressed?'<span class="badge">★</span>':''}${p.photo?'<span class="badge">▣</span>':''}`;return `<div class="person-node ${id===selected?'selected':''} ${p.photo?'important':''} ${mainSpine.has(id)?'spine':''}" data-id="${id}" style="left:${x}px;top:${y}px;--accent:${familyColors[p.family]||'#a17635'}">${p.clergy?'<div class="clergy-cross">✝</div>':''}<div class="portrait ${p.photo?'':'empty'}">${photo}</div><div><h3>${esc(p.short||p.name)}</h3><p>${esc(p.years||'—')}</p>${p.role?`<p>${esc(p.role)}</p>`:''}${p.family?`<span class="family-tag">${esc(p.family)}</span>`:''}<div class="badges">${badges}</div></div></div>`}).join('');document.querySelectorAll('.person-node').forEach(n=>n.onclick=e=>{selected=n.dataset.id;panel.classList.add('open');render()});renderPanel();applyTransform()}function section(title,arr){if(!arr||!arr.length)return'';return `<div class="section"><h4>${title}</h4>${Array.isArray(arr[0])?arr.map(x=>`<div class="row"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></div>`).join(''):`<ul>${arr.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}</div>`}function renderPanel(){const p=byId[selected]||byId[view().ids[0]];if(!p)return;panel.innerHTML=`<div class="panel-photo ${p.photo?'':'empty'}">${p.photo?`<img src="${p.photo}" alt="${esc(p.name)}">`:'Фотография пока не найдена'}</div><div class="panel-kicker">${esc(p.family||'')}</div><h2>${esc(p.name)}</h2><div class="chips">${p.years?`<span class="chip">${esc(p.years)}</span>`:''}${p.role?`<span class="chip">${p.clergy?'✝ ':''}${esc(p.role)}</span>`:''}${p.repressed?'<span class="chip">★ репрессирован</span>':''}</div>${p.summary?`<p class="summary">${esc(p.summary)}</p>`:''}${section('Связи',p.relations)}${section('Образование',p.education)}${section('Рукоположение / сан',p.ordination)}${section('Служение',p.service)}${section('Награды',p.awards)}${section('Преследования',p.repressions)}${section('События',p.events)}<div class="panel-actions">${p.chapterUrl?`<a href="${p.chapterUrl}"><span>Открыть главу</span><b>→</b></a>`:''}${p.sourceUrl?`<a href="${p.sourceUrl}" target="_blank" rel="noopener"><span>Документ PDF</span><b>↗</b></a>`:''}<a href="people.html#${p.id}"><span>Подробнее</span><b>→</b></a></div>`}function switchView(v){currentView=v;selected=treeViews[v].ids[0];document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===v));tx= currentView==='main' ? -260 : -760; ty=0; scale=(v==='main')?.18:((v==='branches'||v==='dobrolyubovy')?.30:(v==='fiseyskie'?.34:.44)); render()}document.querySelectorAll('.view-btn').forEach(b=>b.onclick=()=>switchView(b.dataset.view));document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.35,scale+.08);applyTransform()};document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.16,scale-.08);applyTransform()};document.getElementById('resetBtn').onclick=()=>{tx=currentView==='main'?-260:-760;ty=0;scale=(currentView==='main')?.28:((currentView==='branches'||currentView==='dobrolyubovy')?.30:(currentView==='fiseyskie'?.34:.44));applyTransform()};document.getElementById('panelBtn').onclick=()=>panel.classList.toggle('open');let dragging=false,sx=0,sy=0,otx=0,oty=0;viewport.addEventListener('mousedown',e=>{dragging=true;sx=e.clientX;sy=e.clientY;otx=tx;oty=ty});window.addEventListener('mouseup',()=>dragging=false);window.addEventListener('mousemove',e=>{if(!dragging)return;tx=otx+(e.clientX-sx);ty=oty+(e.clientY-sy);applyTransform()});viewport.addEventListener('wheel',e=>{e.preventDefault();const ds=e.deltaY<0?.06:-.06;scale=Math.max(.16,Math.min(1.35,scale+ds));applyTransform()},{passive:false});document.getElementById('searchInput').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();if(!q)return;const hit=people.find(p=>p.name.toLowerCase().includes(q)||JSON.stringify(p).toLowerCase().includes(q));if(!hit)return;const foundView=Object.entries(treeViews).find(([k,v])=>v.ids.includes(hit.id));if(foundView&&foundView[0]!==currentView){switchView(foundView[0]);}selected=hit.id;const [x,y]=pos(selected);tx=viewport.clientWidth/2-x*scale;ty=viewport.clientHeight/2-y*scale;render();panel.classList.add('open')});
+/* Museum Edition v3.3 — careful spacing and complete Kamenskie exposition */
+(function(){
+  const put=(id,x,y)=>{ if(treeViews.main.positions[id]) treeViews.main.positions[id]=[x,y]; };
+  treeViews.main.title='Линия Каменских';
+  Object.assign(treeViews.main.positions, {
+    'kamensky-pavel-grigorievich':[3400,180], 'kamenskaya-paraskeva-stepanovna':[4100,180],
+    'kamensky-vasily-pavlovich':[3400,660], 'kamenskaya-marya-matveevna':[4100,660],
+
+    'kamenskaya-natalia-vasilievna':[420,1220],
+    'kamenskaya-nastasya-vasilievna':[1040,1220],
+    'kamenskaya-elena-vasilievna':[1660,1220],
+    'kamensky-ivan-vasilievich':[2460,1220], 'kamenskaya-vera-dmitrievna':[3160,1220],
+    'kamensky-pavel-vasilievich':[4180,1220],
+    'kamenskaya-alexandra-vasilievna':[5200,1220],
+    'kamensky-fedor-vasilievich':[5820,1220],
+
+    'kamensky-nikolay-ivanovich':[260,1840],
+    'kamensky-alexandr-ivanovich':[860,1840],
+    'sokolova-zoya-ivanovna':[1460,1840], 'sokolov-nikolay-evgenievich':[2060,1840],
+    'kamensky-alexey-ivanovich':[2760,1840],
+    'kamensky-evgeniy-ivanovich':[3700,1840], 'kamenskaya-anna-konstantinovna':[4400,1840],
+    'kamensky-anatoliy-ivanovich':[5140,1840],
+    'kamensky-dmitry-ivanovich':[5740,1840],
+    'kamenskaya-elena-ivanovna':[6340,1840],
+
+    'kamensky-vladimir-alexeevich':[1720,2500],
+    'kamensky-viktor-alexeevich':[2320,2500],
+    'kamensky-alexandr-alexeevich':[2920,2500],
+    'kamensky-evgeniy-alexeevich':[3520,2500],
+
+    'kamensky-sergey-evgenievich':[3700,2760], 'marya-kondratievna':[4400,2760],
+
+    'kamenskaya-mariya-pavlovna':[4460,2440], 'bogoroditskiy-mikhail-alexeevich':[5160,2440],
+    'kamenskaya-ekaterina-pavlovna':[5940,2440], 'blagoslavov-nikolay-grigorievich':[6640,2440],
+    'kamenskaya-olga-pavlovna':[5160,3060], 'golubev-yakov-dmitrievich':[5860,3060],
+
+    'kamensky-valentin-sergeevich':[1520,3420],
+    'kamensky-alexandr-sergeevich':[2180,3420],
+    'kamensky-vladimir-sergeevich':[3040,3420],
+    'kamenskaya-lyubov-mikhailovna':[3860,3420],
+    'kamenskaya-lilia-sergeevna':[4680,3420],
+    'kravtsov-vyacheslav':[5400,3420],
+
+    'kamenskaya-elena-vladimirovna':[2200,4080],
+    'kamensky-igor-vladimirovich':[2840,4080],
+    'kamensky-alexey-vladimirovich':[3480,4080],
+    'kamenskaya-irina':[4120,4080],
+
+    'kamensky-dmitry-alexeevich':[2840,4720],
+    'anastasia':[3480,4720],
+    'kamensky-ilya-alexeevich':[4120,4720]
+  });
+  branchMarkers.main = [
+    {title:'Каменские',note:'полная основная ветвь рода',x:3140,y:-90,color:familyColors['Каменские']},
+    {title:'Дети Василия Павловича',note:'поколение Ивана и Павла',x:1560,y:980,color:familyColors['Каменские'],soft:true},
+    {title:'Дети Ивана Васильевича',note:'Николай, Александр, Зоя, Алексей, Евгений, Анатолий, Дмитрий, Елена',x:2480,y:1620,color:familyColors['Каменские'],soft:true},
+    {title:'Дети Павла Васильевича',note:'Богородицкие, Благославовы, Голубевы через браки',x:5200,y:2220,color:familyColors['Богородицкие'],soft:true}
+  ];
+})();
+const initialView=Object.entries(treeViews).find(([k,v])=>v.ids.includes(selected));if(initialView){currentView=initialView[0];document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));const [ix,iy]=pos(selected);tx=viewport.clientWidth/2-ix*scale;ty=viewport.clientHeight/2-iy*scale;panel.classList.add('open')}render();
+</script><script>
+(function(){
+  // Back navigation helper
+  function addBackButton(){
+    const page = location.pathname.toLowerCase().split('/').pop() || 'index.html';
+    if(page === 'index.html' && !location.pathname.toLowerCase().includes('/book/')) return;
+    if(document.querySelector('.page-back')) return;
+    const a = document.createElement('a');
+    a.href = '#';
+    a.className = 'page-back';
+    a.innerHTML = '<span class="back-arrow">←</span><span>Назад</span>';
+    const fallback = location.pathname.toLowerCase().includes('/book/') ? '../index.html' : 'index.html';
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.history.length > 1){ window.history.back(); }
+      else { location.href = fallback; }
+    });
+    document.body.appendChild(a);
+  }
+
+  // Click-to-enlarge images. For maps, use the linked full file and allow zoom.
+  function initLightbox(){
+    const selector = '.gallery a img, .book-page a img, .book-page img, .gallery-preview img, .unknown-photo-grid img, .memory-map-image, img.zoomable';
+    const imgs = Array.from(document.querySelectorAll(selector)).filter(img => img.closest('.image-lightbox') === null);
+    if(!imgs.length) return;
+    imgs.forEach(img => img.classList.add('lightboxable'));
+
+    let box = document.querySelector('.image-lightbox');
+    if(!box){
+      box = document.createElement('div');
+      box.className = 'image-lightbox';
+      box.innerHTML = '<div class="lightbox-tools"><button class="lightbox-zoom" type="button">100%</button><button class="lightbox-open" type="button">↗</button></div><button class="lightbox-close" aria-label="Закрыть">×</button><img alt=""/><div class="lightbox-caption"></div>';
+      document.body.appendChild(box);
+    }
+
+    const boxImg = box.querySelector('img');
+    const boxCap = box.querySelector('.lightbox-caption');
+    const zoomBtn = box.querySelector('.lightbox-zoom');
+    const openBtn = box.querySelector('.lightbox-open');
+    let currentSrc = '';
+    let zoomed = false;
+
+    function close(){
+      box.classList.remove('open','map-mode','zoomed');
+      boxImg.removeAttribute('src');
+      boxCap.textContent = '';
+      currentSrc = '';
+      zoomed = false;
+      zoomBtn.textContent = '100%';
+    }
+
+    function setZoom(next){
+      zoomed = next;
+      box.classList.toggle('zoomed', zoomed);
+      zoomBtn.textContent = zoomed ? 'По экрану' : '100%';
+    }
+
+    imgs.forEach(img => {
+      img.addEventListener('click', function(e){
+        e.preventDefault();
+        const link = img.closest('a');
+        const src = img.getAttribute('data-full') || link?.getAttribute('href') || img.currentSrc || img.src;
+        currentSrc = src;
+        boxImg.src = src;
+        boxImg.alt = img.alt || '';
+        const figure = img.closest('figure');
+        const cap = figure?.querySelector('figcaption')?.textContent?.trim() || img.alt || '';
+        boxCap.textContent = cap;
+
+        const isMap = img.classList.contains('memory-map-image') || src.includes('memory-map') || img.alt.toLowerCase().includes('карта');
+        box.classList.toggle('map-mode', isMap);
+        setZoom(false);
+        box.classList.add('open');
+      });
+    });
+
+    zoomBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setZoom(!zoomed);
+    });
+
+    openBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(currentSrc) window.open(currentSrc, '_blank', 'noopener');
+    });
+
+    box.addEventListener('click', function(e){ if(e.target === box) close(); });
+    box.querySelector('.lightbox-close').addEventListener('click', close);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ addBackButton(); initLightbox(); });
+  } else {
+    addBackButton(); initLightbox();
+  }
+})();
+</script>
+</body></html>
