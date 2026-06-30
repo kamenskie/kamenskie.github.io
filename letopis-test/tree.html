@@ -329,4 +329,46 @@ const initialView=Object.entries(treeViews).find(([k,v])=>v.ids.includes(selecte
 })();
 </script>
 
+<script>
+(function(){
+  function isMobile(){return window.matchMedia && window.matchMedia('(max-width:900px)').matches}
+  function closePanelOnMobile(){
+    if(!isMobile()) return;
+    const panel=document.getElementById('panel');
+    if(panel) panel.classList.remove('open');
+  }
+  function wireTreePanelMobile(){
+    if(!isMobile()) return;
+    const panel=document.getElementById('panel');
+    if(!panel) return;
+
+    // Close default selected card after original render.
+    panel.classList.remove('open');
+
+    const nodes=document.getElementById('nodes');
+    if(nodes && !nodes.dataset.mobilePanelWired){
+      nodes.dataset.mobilePanelWired='1';
+      nodes.addEventListener('click', function(e){
+        if(e.target.closest('.person-node')){
+          setTimeout(()=>panel.classList.add('open'), 60);
+        }
+      }, true);
+    }
+
+    // Tap empty canvas closes the card.
+    const viewport=document.getElementById('viewport');
+    if(viewport && !viewport.dataset.mobilePanelCloseWired){
+      viewport.dataset.mobilePanelCloseWired='1';
+      viewport.addEventListener('click', function(e){
+        if(!e.target.closest('.person-node') && !e.target.closest('#panel')){
+          panel.classList.remove('open');
+        }
+      });
+    }
+  }
+  window.addEventListener('load', ()=>setTimeout(wireTreePanelMobile,150));
+  window.addEventListener('resize', closePanelOnMobile);
+  setTimeout(wireTreePanelMobile,350);
+})();
+</script>
 </body></html>

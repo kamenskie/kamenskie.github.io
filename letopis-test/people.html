@@ -264,4 +264,174 @@ let active=location.hash?location.hash.slice(1):people[0].id,filter='all',q='';c
   document.body.appendChild(menu);
 })();
 </script>
+<script>/* v3.29: old broad people dropdown disabled */</script>
+<script>/* v3.30: previous mobile surname click-proxy disabled */</script>
+<script>
+(function(){
+  const SURNAMES = [
+    'Все',
+    'Благославовы',
+    'Богородицкие',
+    'Владыкины',
+    'Голубевы',
+    'Горины',
+    'Добролюбовы',
+    'Каменские',
+    'Ковалевы',
+    'Кравцовы',
+    'Рубины',
+    'Соколовы',
+    'Турлуповы',
+    'Фисейские'
+  ];
+
+  function isMobile(){
+    return window.matchMedia && window.matchMedia('(max-width:760px)').matches;
+  }
+
+  function normalize(text){
+    return (text || '').replace(/\s+/g,' ').trim().toLowerCase();
+  }
+
+  function getPersonCards(){
+    const selectors = [
+      '.person-card',
+      '.people-card',
+      '.person-row',
+      '.person-item',
+      '[data-family]',
+      '[data-person]',
+      '[data-id]'
+    ];
+
+    const found = new Set();
+    selectors.forEach(selector=>{
+      document.querySelectorAll(selector).forEach(el=>{
+        if(
+          el.closest('.people-clean-surname-menu') ||
+          el.closest('.mobile-site-menu') ||
+          el.closest('.people-clean-surname-toggle')
+        ) return;
+
+        const text = normalize(el.textContent);
+        const looksLikePerson =
+          el.matches('.person-card,.people-card,.person-row,.person-item') ||
+          el.dataset.person ||
+          el.dataset.id ||
+          SURNAMES.some(s => s !== 'Все' && text.includes(normalize(s)));
+
+        if(looksLikePerson) found.add(el);
+      });
+    });
+
+    // Avoid tiny buttons: keep actual cards/rows only.
+    return Array.from(found).filter(el => {
+      const rect = el.getBoundingClientRect();
+      const text = normalize(el.textContent);
+      return text.length > 20 || rect.height > 70;
+    });
+  }
+
+  function cardMatchesSurname(card, surname){
+    if(surname === 'Все') return true;
+
+    const s = normalize(surname);
+    const dataset = normalize(Object.values(card.dataset || {}).join(' '));
+    const text = normalize(card.textContent);
+
+    return dataset.includes(s) || text.includes(s);
+  }
+
+  function applySurnameFilter(surname){
+    const cards = getPersonCards();
+    cards.forEach(card=>{
+      const show = cardMatchesSurname(card, surname);
+      card.classList.toggle('people-filter-hidden', !show);
+    });
+
+    // Hide any opened information panels/details caused by previous state.
+    document.querySelectorAll('.open, .active').forEach(el=>{
+      if(
+        el.closest('.person-card, .people-card, .person-row, .person-item') &&
+        !el.closest('.people-clean-surname-menu')
+      ){
+        el.classList.remove('open');
+      }
+    });
+  }
+
+  function setupCleanSurnameMenu(){
+    if(!isMobile()) return;
+    if(document.querySelector('.people-clean-surname-toggle')) return;
+
+    document.body.classList.add('people-clean-surname-mode');
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'people-clean-surname-toggle';
+    toggle.innerHTML = '<span>Фамилии</span><b>⌄</b>';
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'people-clean-surname-backdrop';
+
+    const menu = document.createElement('div');
+    menu.className = 'people-clean-surname-menu';
+    menu.setAttribute('aria-label', 'Фильтр по фамилии');
+
+    menu.innerHTML = SURNAMES.map((name, index) =>
+      '<button type="button" data-surname="'+name.replace(/"/g,'&quot;')+'" class="'+(index===0?'active':'')+'">'+name+'</button>'
+    ).join('');
+
+    const main = document.querySelector('main') || document.body;
+    main.insertBefore(toggle, main.firstChild);
+    document.body.appendChild(backdrop);
+    document.body.appendChild(menu);
+
+    function open(){
+      menu.classList.add('open');
+      backdrop.classList.add('open');
+      toggle.classList.add('open');
+      toggle.querySelector('b').textContent = '×';
+    }
+
+    function close(){
+      menu.classList.remove('open');
+      backdrop.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.querySelector('b').textContent = '⌄';
+    }
+
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      menu.classList.contains('open') ? close() : open();
+    });
+
+    backdrop.addEventListener('click', close);
+
+    menu.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        const surname = btn.dataset.surname;
+        menu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        toggle.querySelector('span').textContent = surname === 'Все' ? 'Все фамилии' : surname;
+
+        applySurnameFilter(surname);
+
+        setTimeout(close, 80);
+      });
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', setupCleanSurnameMenu);
+  }else{
+    setupCleanSurnameMenu();
+  }
+})();
+</script>
 </body></html>
