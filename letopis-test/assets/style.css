@@ -2777,3 +2777,64 @@ body.book-toc-page .toc-grid{
     cursor:pointer !important;
   }
 }
+
+
+/* v3.31 — "Лица рода": clear mobile logic
+   Фамилии = фильтр. Человек = открыть информацию. */
+@media(max-width:760px){
+  body.people-mobile-list-mode .layout{
+    display:block !important;
+  }
+
+  body.people-mobile-list-mode #personList{
+    display:block !important;
+  }
+
+  body.people-mobile-list-mode #personCard{
+    display:none !important;
+  }
+
+  body.people-mobile-list-mode.people-detail-open #personCard{
+    display:block !important;
+    margin-top:14px !important;
+  }
+
+  body.people-mobile-list-mode.people-detail-open #personList{
+    display:none !important;
+  }
+
+  body.people-mobile-list-mode .list .item,
+  body.people-mobile-list-mode #personList .item{
+    position:relative !important;
+    width:100% !important;
+    cursor:pointer !important;
+    padding-right:96px !important;
+  }
+
+  body.people-mobile-list-mode .list .item:after,
+  body.people-mobile-list-mode #personList .item:after{
+    content:"Подробнее" !important;
+    position:absolute !important;
+    right:14px !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    padding:8px 10px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(138,86,39,.22) !important;
+    background:rgba(255,248,238,.95) !important;
+    color:#6a4a2d !important;
+    font:800 11px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+  }
+
+  .people-detail-back{
+    display:block !important;
+    width:100% !important;
+    min-height:44px !important;
+    margin:0 0 14px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(138,86,39,.22) !important;
+    background:rgba(255,248,238,.96) !important;
+    color:#513b29 !important;
+    font:800 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+  }
+}

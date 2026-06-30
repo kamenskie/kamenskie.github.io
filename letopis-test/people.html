@@ -434,4 +434,69 @@ let active=location.hash?location.hash.slice(1):people[0].id,filter='all',q='';c
   }
 })();
 </script>
+<script>
+(function(){
+  function isMobile(){
+    return window.matchMedia && window.matchMedia('(max-width:760px)').matches;
+  }
+
+  function closePeopleDetail(){
+    if(!isMobile()) return;
+    document.body.classList.remove('people-detail-open');
+  }
+
+  function openPeopleDetail(){
+    if(!isMobile()) return;
+    document.body.classList.add('people-detail-open');
+    const card = document.getElementById('personCard');
+    if(card) setTimeout(()=>card.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+  }
+
+  function setupPeopleMobileDetail(){
+    if(!isMobile()) return;
+
+    document.body.classList.add('people-mobile-list-mode');
+
+    const card = document.getElementById('personCard');
+    if(card && !card.querySelector('.people-detail-back')){
+      const back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'people-detail-back';
+      back.textContent = '← К списку людей';
+      back.addEventListener('click', closePeopleDetail);
+      card.prepend(back);
+    }
+
+    const list = document.getElementById('personList');
+    if(list && !list.dataset.mobileDetailWired){
+      list.dataset.mobileDetailWired = '1';
+      list.addEventListener('click', function(e){
+        const item = e.target.closest('.item');
+        if(!item) return;
+        // Let existing page script switch active person first, then show card.
+        setTimeout(openPeopleDetail, 80);
+      }, true);
+    }
+
+    // Choosing a surname/searching should return user to list, not open info.
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.people-clean-surname-menu button') || e.target.closest('.family-filter')){
+        setTimeout(closePeopleDetail, 120);
+      }
+    }, true);
+
+    const search = document.getElementById('archiveSearch');
+    if(search && !search.dataset.mobileDetailWired){
+      search.dataset.mobileDetailWired = '1';
+      search.addEventListener('input', closePeopleDetail);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', setupPeopleMobileDetail);
+  }else{
+    setupPeopleMobileDetail();
+  }
+})();
+</script>
 </body></html>
