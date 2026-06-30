@@ -453,4 +453,78 @@ const initialView=Object.entries(treeViews).find(([k,v])=>v.ids.includes(selecte
   });
 })();
 </script>
+<script>
+(function(){
+  function isMobile(){return window.matchMedia && window.matchMedia('(max-width:900px)').matches}
+
+  function setTreeReadableForElders(){
+    if(!isMobile() || typeof applyTransform !== 'function') return;
+    try{
+      // Elder-friendly default: larger cards and text.
+      scale = 0.235;
+      tx = Math.round(window.innerWidth * 0.06);
+      ty = 28;
+      applyTransform();
+    }catch(e){}
+  }
+
+  function setTreeOverviewForElders(){
+    if(!isMobile() || typeof applyTransform !== 'function') return;
+    try{
+      scale = 0.14;
+      tx = Math.round(window.innerWidth * 0.05);
+      ty = 18;
+      applyTransform();
+    }catch(e){}
+  }
+
+  window.addEventListener('load', function(){
+    setTimeout(setTreeReadableForElders, 650);
+  });
+
+  const fit = document.getElementById('treeFitMobile');
+  if(fit){
+    fit.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setTreeOverviewForElders();
+    };
+  }
+
+  // When opening "Линии рода", do not blur the tree behind the menu.
+  const lineBtn = document.getElementById('treeLinesBtn');
+  const backdrop = document.getElementById('treeMobileBackdrop') || document.querySelector('.tree-mobile-backdrop');
+  lineBtn && lineBtn.addEventListener('click', function(){
+    setTimeout(function(){
+      if(backdrop) backdrop.classList.remove('open');
+    }, 20);
+  });
+})();
+</script>
+<script>
+(function(){
+  function isMobile(){return window.matchMedia && window.matchMedia('(max-width:900px)').matches}
+  function elderScale(){
+    if(!isMobile() || typeof applyTransform !== 'function') return;
+    try{
+      scale = 0.285;
+      tx = Math.round(window.innerWidth * 0.05);
+      ty = 30;
+      applyTransform();
+    }catch(e){}
+  }
+  function elderFit(){
+    if(!isMobile() || typeof applyTransform !== 'function') return;
+    try{
+      scale = 0.16;
+      tx = Math.round(window.innerWidth * 0.05);
+      ty = 18;
+      applyTransform();
+    }catch(e){}
+  }
+  window.addEventListener('load', function(){setTimeout(elderScale, 900)});
+  const fit=document.getElementById('treeFitMobile');
+  if(fit){fit.onclick=function(e){e.preventDefault();e.stopPropagation();elderFit();};}
+})();
+</script>
 </body></html>
