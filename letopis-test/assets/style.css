@@ -3164,3 +3164,28 @@ body.tree-body .zoom{
   line-height:1.55;
   margin:0 0 18px;
 }
+
+
+/* v3.38 — final wording for stats in "Лица рода" */
+.stats .stat span{
+  line-height:1.32;
+}
+
+
+/* v3.39 — quieter stat captions and ordered people list */
+.archive-page .stats .stat span,
+.stats .stat span{
+  font-size:12px !important;
+  line-height:1.25 !important;
+  letter-spacing:.08em !important;
+  opacity:.78 !important;
+}
+
+@media(max-width:760px){
+  .archive-page .stats .stat span,
+  .stats .stat span{
+    font-size:11px !important;
+    line-height:1.22 !important;
+    letter-spacing:.06em !important;
+  }
+}
